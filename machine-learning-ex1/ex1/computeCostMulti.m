@@ -13,9 +13,9 @@ J = 0;
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
 
-
-
-
+matrix = X * theta - y;
+matrix = matrix .* matrix;
+J = sum(matrix) / (2 * m);
 
 % =========================================================================
 

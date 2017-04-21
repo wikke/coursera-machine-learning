@@ -81,17 +81,42 @@ X = [ones(m, 1) X];
 
 fprintf('Running gradient descent ...\n');
 
-% Choose some alpha value
-alpha = 0.01;
-num_iters = 400;
+num_iters = 100;
 
-% Init Theta and Run Gradient Descent 
+alpha = 0.01;
 theta = zeros(3, 1);
-[theta, J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters);
+[theta, J_history_1] = gradientDescentMulti(X, y, theta, alpha, num_iters);
+
+alpha = 0.03;
+theta = zeros(3, 1);
+[theta, J_history_2] = gradientDescentMulti(X, y, theta, alpha, num_iters);
+
+alpha = 0.1;
+theta = zeros(3, 1);
+[theta, J_history_3] = gradientDescentMulti(X, y, theta, alpha, num_iters);
+
+% BEST CHOICE from figure
+alpha = 0.3;
+theta = zeros(3, 1);
+[theta, J_history_4] = gradientDescentMulti(X, y, theta, alpha, num_iters);
+best_theta = theta;
+
+alpha = 1;
+theta = zeros(3, 1);
+[theta, J_history_5] = gradientDescentMulti(X, y, theta, alpha, num_iters);
+
 
 % Plot the convergence graph
 figure;
-plot(1:numel(J_history), J_history, '-b', 'LineWidth', 2);
+plot(1:numel(J_history_1), J_history_1, 'k', 'LineWidth', 2);
+hold on;
+plot(1:numel(J_history_2), J_history_2, 'r', 'LineWidth', 2);
+plot(1:numel(J_history_3), J_history_3, 'g', 'LineWidth', 2);
+plot(1:numel(J_history_4), J_history_4, 'b', 'LineWidth', 2);
+plot(1:numel(J_history_5), J_history_5, 'm', 'LineWidth', 2);
+
+legend('0.01', '0.03', '0.1', '0.3', '1');
+
 xlabel('Number of iterations');
 ylabel('Cost J');
 
@@ -106,6 +131,8 @@ fprintf('\n');
 % not need to be normalized.
 price = 0; % You should change this
 
+param = ([1650, 3] - mu) ./ sigma;
+price = [ones(1), param] * best_theta;
 
 % ============================================================
 
@@ -151,6 +178,7 @@ fprintf('\n');
 % ====================== YOUR CODE HERE ======================
 price = 0; % You should change this
 
+price = [1, 1650, 3] * theta;
 
 % ============================================================
 
