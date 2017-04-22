@@ -134,7 +134,14 @@ fprintf(['\nRunning PCA on face dataset.\n' ...
 
 %  Visualize the top 36 eigenvectors found
 displayData(U(:, 1:36)');
+fprintf('Program paused. Press enter to continue.\n');
+pause;
 
+displayData(U(:, 1:128)');
+fprintf('Program paused. Press enter to continue.\n');
+pause;
+
+displayData(U(:, 1:512)');
 fprintf('Program paused. Press enter to continue.\n');
 pause;
 

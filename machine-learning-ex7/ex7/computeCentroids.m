@@ -26,12 +26,36 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
+% Algorithm 1
+
+%centroid_count = zeros(K, 1);
+
+%for i = 1:m,
+%  index = idx(i);
+%  centroids(index,:) = centroids(index,:) + X(i,:);
+%  centroid_count(index) = centroid_count(index) + 1;
+%end;
+
+%for i = 1:K,
+%  if centroid_count(i) != 0,
+%    centroids(i,:) = centroids(i,:) / centroid_count(i);
+%  end;
+%end;
 
 
+% Algorithm 2
 
+for i=1:K,
+  selected_idx = (idx == i);
+  production_map = selected_idx;
 
+  % wish there would be a more graceful way to expand
+  for j=1:n-1,
+    production_map = [production_map selected_idx];
+  end;
 
-
+  centroids(i,:) = sum(X .* production_map) / sum(selected_idx);
+end;
 
 % =============================================================
 
